@@ -30,7 +30,7 @@
     </tr>
     <c:if test="${meal.exceed==false}">
         <tr>
-        <td><font color="red"> ${meal.dateTime.format(local)}</font></td>
+        <td><font color="green"> ${meal.dateTime.format(local)}</font></td>
         <td><font color="green">${meal.description}</font></td>
         <td><font color="green">${meal.calories}</font></td>
     </c:if>
