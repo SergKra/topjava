@@ -1,11 +1,8 @@
 package ru.javawebinar.topjava.dao;
 
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.MealWithExceed;
-import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +16,7 @@ import java.util.stream.Collectors;
 public class MealDaoImpl implements MealDao {
 
     private static AtomicInteger index = new AtomicInteger(6);
-    private static ConcurrentHashMap<Integer, Meal> mealList = new ConcurrentHashMap<>();
+    private static Map<Integer, Meal> mealList = new ConcurrentHashMap<>();
 
 
 
@@ -33,7 +30,7 @@ public class MealDaoImpl implements MealDao {
        mealList.putIfAbsent(6,new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510,6));
     }
 
-    public ConcurrentHashMap<Integer, Meal> getMealList() {
+    public Map<Integer, Meal> getMealList() {
         return mealList;
     }
 
@@ -57,13 +54,13 @@ public class MealDaoImpl implements MealDao {
     }
 
     @Override
-    public Meal searchById(Integer id) {
+    public Meal get(Integer id) {
         return mealList.getOrDefault(id, null);
     }
 
-    public List<MealWithExceed> getMealWithExceedsList()
+    public List<Meal> getAll()
     {
-        List<Meal> meals = mealList.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
-        return MealsUtil.getFilteredWithExceededByCycle(meals, LocalTime.MIN, LocalTime.MAX, 2000);
+        return mealList.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
+
     }
 }

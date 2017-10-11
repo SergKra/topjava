@@ -11,6 +11,6 @@ public interface MealDao {
     public void add(Meal meal);
     public void delete(Integer id);
     public void update (Meal meal);
-    public Meal searchById(Integer id);
+    public Meal get(Integer id);
 
 }
