@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
@@ -17,36 +16,36 @@
         <th width="100">Calories</th>
 
     </tr>
-<c:forEach items="${mealList}" var="meal">
+    <c:forEach items="${mealList}" var="meal">
 
-    <c:if test="${meal.exceed==true}">
-    <tr>
-        <td><font color="red"> ${meal.dateTime.format(local)}</font></td>
-        <td><font color="red">${meal.description}</font></td>
-        <td><font color="red">${meal.calories}</font></td>
+        <c:if test="${meal.exceed==true}">
+            <tr>
+            <td><font color="red"> ${meal.dateTime.format(local)}</font></td>
+            <td><font color="red">${meal.description}</font></td>
+            <td><font color="red">${meal.calories}</font></td>
 
-        <td><a href="meals?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
-        <td><a href="meals?action=edit&id=<c:out value="${meal.id}"/>">EDIT</a></td>
+            <td><a href="meals?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
+            <td><a href="meals?action=edit&id=<c:out value="${meal.id}"/>">EDIT</a></td>
 
-    </c:if>
+        </c:if>
 
-    </tr>
-    <c:if test="${meal.exceed==false}">
-        <tr>
-        <td><font color="green"> ${meal.dateTime.format(local)}</font></td>
-        <td><font color="green">${meal.description}</font></td>
-        <td><font color="green">${meal.calories}</font></td>
-        <td><a href="meals?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
-        <td><a href="meals?action=edit&id=<c:out value="${meal.id}"/>">EDIT</a></td>
-    </c:if>
+        </tr>
+        <c:if test="${meal.exceed==false}">
+            <tr>
+            <td><font color="green"> ${meal.dateTime.format(local)}</font></td>
+            <td><font color="green">${meal.description}</font></td>
+            <td><font color="green">${meal.calories}</font></td>
+            <td><a href="meals?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
+            <td><a href="meals?action=edit&id=<c:out value="${meal.id}"/>">EDIT</a></td>
+        </c:if>
 
-    </tr>
+        </tr>
 
-</c:forEach>
-    </table>
+    </c:forEach>
+</table>
 
 <br/>
 <br/>
-<h3> <a href="meals?action=add">Add Meal</a></h3>
+<h3><a href="meals?action=add">Add Meal</a></h3>
 </body>
 </html>

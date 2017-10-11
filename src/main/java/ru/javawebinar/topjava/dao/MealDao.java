@@ -9,8 +9,11 @@ import ru.javawebinar.topjava.model.Meal;
 public interface MealDao {
 
     public void add(Meal meal);
+
     public void delete(Integer id);
-    public void update (Meal meal);
+
+    public void update(Meal meal);
+
     public Meal get(Integer id);
 
 }

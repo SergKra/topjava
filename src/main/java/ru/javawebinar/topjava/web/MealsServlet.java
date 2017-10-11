@@ -29,7 +29,7 @@ public class MealsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        request.setCharacterEncoding( "UTF-8" );
+        request.setCharacterEncoding("UTF-8");
         request.setAttribute("local", formatter);
 
         if (action != null && action.equalsIgnoreCase("delete")) {
@@ -37,55 +37,48 @@ public class MealsServlet extends HttpServlet {
             mealDao.delete(id);
 
 
-        }
-        else if (action != null && action.equalsIgnoreCase("edit")) {
+        } else if (action != null && action.equalsIgnoreCase("edit")) {
             int id = Integer.parseInt(request.getParameter("id"));
             Meal meal = mealDao.get(id);
             request.setAttribute("meal", meal);
-            request.getRequestDispatcher("mealsEdit.jsp").forward(request,response);
+            request.getRequestDispatcher("mealsEdit.jsp").forward(request, response);
             return;
-        }
-        else if (action != null && action.equalsIgnoreCase("add"))
-        {
-            request.getRequestDispatcher("mealsEdit.jsp").forward(request,response);
+        } else if (action != null && action.equalsIgnoreCase("add")) {
+            request.getRequestDispatcher("mealsEdit.jsp").forward(request, response);
             return;
         }
         List<MealWithExceed> list = MealsUtil.getFilteredWithExceededByCycle(mealDao.getAll(), LocalTime.MIN, LocalTime.MAX, 2000);
         request.setAttribute("mealList", list);
-        request.getRequestDispatcher("meals.jsp").forward(request,response);
+        request.getRequestDispatcher("meals.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("local", formatter);
-        req.setCharacterEncoding( "UTF-8" );
+        req.setCharacterEncoding("UTF-8");
         LocalDateTime date = null;
         Meal meal = null;
 
-                String description = req.getParameter("description");
-            int calories = Integer.parseInt(req.getParameter("calories"));
+        String description = req.getParameter("description");
+        int calories = Integer.parseInt(req.getParameter("calories"));
         try {
             date = LocalDateTime.parse(req.getParameter("date"), formatter);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         String id = req.getParameter("id");
-            if (id==null || id.isEmpty()) {
-                meal = new Meal(date, description, calories);
-                mealDao.add(meal);
-            }
-            else {
-                meal = new Meal(date, description, calories, Integer.parseInt(id));
-                mealDao.update(meal);
-            }
-
+        if (id == null || id.isEmpty()) {
+            meal = new Meal(date, description, calories);
+            mealDao.add(meal);
+        } else {
+            meal = new Meal(date, description, calories, Integer.parseInt(id));
+            mealDao.update(meal);
+        }
 
 
         List<MealWithExceed> list = MealsUtil.getFilteredWithExceededByCycle(mealDao.getAll(), LocalTime.MIN, LocalTime.MAX, 2000);
         req.setAttribute("mealList", list);
-        req.getRequestDispatcher("meals.jsp").forward(req,resp);
+        req.getRequestDispatcher("meals.jsp").forward(req, resp);
 
 
     }

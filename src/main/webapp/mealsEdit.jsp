@@ -12,19 +12,19 @@
 
 <form method="post" action="meals" name="frmAddUser">
     ID : <input type="text" readonly="readonly" name="id"
-                     value="<c:out value="${meal.id}" />" /> <br />
+                value="<c:out value="${meal.id}" />"/> <br/>
     Description : <input
         type="text" name="description"
-        value="<c:out value="${meal.description}" />" /> <br />
+        value="<c:out value="${meal.description}" />"/> <br/>
     Calories : <input
         type="text" name="calories"
-        value="<c:out value="${meal.calories}" />" /> <br />
+        value="<c:out value="${meal.calories}" />"/> <br/>
     Date : <input
         type="text" name="date"
-        value="${meal.dateTime.format(local)}" /> <br />
+        value="${meal.dateTime.format(local)}"/> <br/>
 
     <input
-            type="submit" value="Submit" />
+            type="submit" value="Submit"/>
 </form>
 
 
