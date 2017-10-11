@@ -25,7 +25,10 @@
         <td><font color="red">${meal.description}</font></td>
         <td><font color="red">${meal.calories}</font></td>
 
-        </c:if>
+        <td><a href="meals?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
+        <td><a href="meals?action=edit&id=<c:out value="${meal.id}"/>">EDIT</a></td>
+
+    </c:if>
 
     </tr>
     <c:if test="${meal.exceed==false}">
@@ -33,6 +36,8 @@
         <td><font color="green"> ${meal.dateTime.format(local)}</font></td>
         <td><font color="green">${meal.description}</font></td>
         <td><font color="green">${meal.calories}</font></td>
+        <td><a href="meals?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
+        <td><a href="meals?action=edit&id=<c:out value="${meal.id}"/>">EDIT</a></td>
     </c:if>
 
     </tr>
@@ -40,5 +45,8 @@
 </c:forEach>
     </table>
 
+<br/>
+<br/>
+<h3> <a href="meals?action=add">Add Meal</a></h3>
 </body>
 </html>

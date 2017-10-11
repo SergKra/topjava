@@ -54,11 +54,14 @@ public class MealsUtil {
     }
 
     public static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
-        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded, meal.getId());
+
     }
 
+    /*
     public static List<MealWithExceed> getMealExceeded()
     {
+
         List<MealWithExceed> mealsExceeded = Arrays.asList(
                 new MealWithExceed(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500,false),
                 new MealWithExceed(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000,false),
@@ -67,6 +70,9 @@ public class MealsUtil {
                 new MealWithExceed(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500,true),
                 new MealWithExceed(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510,true)
         );
-        return mealsExceeded;
+
+        return null;
+
     }
+     */
 }
