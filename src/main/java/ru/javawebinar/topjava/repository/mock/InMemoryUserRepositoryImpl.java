@@ -67,6 +67,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     @Override
     public User getByEmail(String email) {
         log.info("getByEmail {}", email);
+        /*
         User userToReturn = null;
         List<User> users = getAll();
         for (User user: users)
@@ -76,5 +77,8 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
         }
         return userToReturn;
+*/
+
+        return getAll().stream().filter(user -> user.getEmail().equalsIgnoreCase(email)).findFirst().orElse(null);
     }
 }
