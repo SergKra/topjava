@@ -20,7 +20,6 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
-import java.util.Map;
 
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
@@ -54,16 +53,7 @@ public class MealServiceTest {
     @AfterClass
     public static void afterClass()
     {
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        for (Map.Entry<String, Long> pair:CustomTest.list.entrySet())
-        {
-            System.out.println(pair.getKey() + " - " + pair.getValue());
-        }
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        CustomTest.printResults();
     }
 
     @Test

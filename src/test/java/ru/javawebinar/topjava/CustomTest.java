@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CustomTest extends TestWatcher {
     private static final Logger log = LoggerFactory.getLogger(CustomTest.class);
-    public static Map<String, Long> list = new HashMap<>();
+    private  static Map<String, Long> list = new HashMap<>();
     private Date startDate;
 
     /*
@@ -50,4 +50,20 @@ public class CustomTest extends TestWatcher {
         list.put(description.getMethodName(), diff);
     }
 
+
+    public static void printResults()
+    {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        for (Map.Entry<String, Long> pair:list.entrySet())
+        {
+            System.out.println(pair.getKey() + " - " + pair.getValue());
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
+
+
+}
