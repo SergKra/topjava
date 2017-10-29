@@ -11,12 +11,14 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+
 public class JdbcMealRepositoryImpl implements MealRepository {
 
     private static final RowMapper<Meal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Meal.class);
@@ -84,5 +86,10 @@ public class JdbcMealRepositoryImpl implements MealRepository {
         return jdbcTemplate.query(
                 "SELECT * FROM meals WHERE user_id=?  AND date_time BETWEEN  ? AND ? ORDER BY date_time DESC",
                 ROW_MAPPER, userId, startDate, endDate);
+    }
+
+    @Override
+    public Meal getWithUser(int id, int userId) throws NotFoundException {
+        return null;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.DateTimeUtil;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -83,6 +84,11 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         return getAllAsStream(userId)
                 .filter(um -> DateTimeUtil.isBetween(um.getDateTime(), startDateTime, endDateTime))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Meal getWithUser(int id, int userId) throws NotFoundException {
+        return null;
     }
 
     private Stream<Meal> getAllAsStream(int userId) {

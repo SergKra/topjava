@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
+
 public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
@@ -71,5 +72,10 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         return jdbcTemplate.query("SELECT * FROM users ORDER BY name, email", ROW_MAPPER);
+    }
+
+    @Override
+    public User getAllMeal(Integer id) {
+        return null;
     }
 }

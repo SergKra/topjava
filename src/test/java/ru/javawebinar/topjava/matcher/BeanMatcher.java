@@ -52,7 +52,7 @@ public class BeanMatcher<T> {
     }
 
     public void assertEquals(T expected, T actual) {
-        Assert.assertEquals(wrap(expected), wrap(actual));
+        Assert.assertEquals(wrap(expected), wrap( actual));
     }
 
     public void assertCollectionEquals(Collection<T> expected, Collection<T> actual) {

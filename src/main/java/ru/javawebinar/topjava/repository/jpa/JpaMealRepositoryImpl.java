@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,8 +38,8 @@ public class JpaMealRepositoryImpl implements MealRepository {
     @Transactional
     public boolean delete(int id, int userId) {
         return em.createNamedQuery(Meal.DELETE)
-                .setParameter("id", id)
-                .setParameter("userId", userId)
+                .setParameter(1, id)
+                .setParameter(2, userId)
                 .executeUpdate() != 0;
     }
 
@@ -51,15 +52,20 @@ public class JpaMealRepositoryImpl implements MealRepository {
     @Override
     public List<Meal> getAll(int userId) {
         return em.createNamedQuery(Meal.ALL_SORTED, Meal.class)
-                .setParameter("userId", userId)
+                .setParameter(1, userId)
                 .getResultList();
     }
 
     @Override
     public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
         return em.createNamedQuery(Meal.GET_BETWEEN, Meal.class)
-                .setParameter("userId", userId)
-                .setParameter("startDate", startDate)
-                .setParameter("endDate", endDate).getResultList();
+                .setParameter(1, userId)
+                .setParameter(2, startDate)
+                .setParameter(3, endDate).getResultList();
+    }
+
+    @Override
+    public Meal getWithUser(int id, int userId) throws NotFoundException {
+        return null;
     }
 }

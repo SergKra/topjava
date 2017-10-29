@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.javawebinar.topjava.ActiveDbProfileResolver;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -28,7 +27,8 @@ import static ru.javawebinar.topjava.UserTestData.*;
 })
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
+@ActiveProfiles({"postgres", "jpa"})
+//@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 public class UserServiceTest {
 
     static {
@@ -100,4 +100,6 @@ public class UserServiceTest {
         service.update(updated);
         MATCHER.assertEquals(updated, service.get(USER_ID));
     }
+
+
 }

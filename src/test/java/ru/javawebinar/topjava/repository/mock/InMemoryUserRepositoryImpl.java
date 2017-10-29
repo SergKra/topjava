@@ -44,6 +44,11 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User getAllMeal(Integer id) {
+        return null;
+    }
+
+    @Override
     public User getByEmail(String email) {
         return repository.values().stream()
                 .filter(u -> email.equals(u.getEmail()))

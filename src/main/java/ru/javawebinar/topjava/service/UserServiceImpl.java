@@ -1,5 +1,12 @@
 package ru.javawebinar.topjava.service;
 
+/**
+ * Created by j on 28.10.2017.
+ */
+
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,56 +21,62 @@ import java.util.List;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserServiceImpl implements UserService {
+    @Service
+    public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
+        private final UserRepository repository;
 
-    @Autowired
-    public UserServiceImpl(UserRepository repository) {
-        this.repository = repository;
+        @Autowired
+        public UserServiceImpl(UserRepository repository) {
+            this.repository = repository;
+        }
+
+        @CacheEvict(value = "users", allEntries = true)
+        @Override
+        public User create(User user) {
+            Assert.notNull(user, "user must not be null");
+            return repository.save(user);
+        }
+
+        @CacheEvict(value = "users", allEntries = true)
+        @Override
+        public void delete(int id) throws NotFoundException {
+            checkNotFoundWithId(repository.delete(id), id);
+        }
+
+        @Override
+        public User get(int id) throws NotFoundException {
+            return checkNotFoundWithId(repository.get(id), id);
+        }
+
+        @Override
+        public User getByEmail(String email) throws NotFoundException {
+            Assert.notNull(email, "email must not be null");
+            return checkNotFound(repository.getByEmail(email), "email=" + email);
+        }
+
+        @Cacheable("users")
+        @Override
+        public List<User> getAll() {
+            return repository.getAll();
+        }
+
+        @Override
+        public User getAllMeal(Integer id) {
+            return repository.getAllMeal(id);
+        }
+
+        @CacheEvict(value = "users", allEntries = true)
+        @Override
+        public void update(User user) {
+            Assert.notNull(user, "user must not be null");
+            repository.save(user);
+        }
+
+        @CacheEvict(value = "users", allEntries = true)
+        @Override
+        public void evictCache() {
+            // only for evict cache
+        }
     }
 
-    @CacheEvict(value = "users", allEntries = true)
-    @Override
-    public User create(User user) {
-        Assert.notNull(user, "user must not be null");
-        return repository.save(user);
-    }
-
-    @CacheEvict(value = "users", allEntries = true)
-    @Override
-    public void delete(int id) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id), id);
-    }
-
-    @Override
-    public User get(int id) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id), id);
-    }
-
-    @Override
-    public User getByEmail(String email) throws NotFoundException {
-        Assert.notNull(email, "email must not be null");
-        return checkNotFound(repository.getByEmail(email), "email=" + email);
-    }
-
-    @Cacheable("users")
-    @Override
-    public List<User> getAll() {
-        return repository.getAll();
-    }
-
-    @CacheEvict(value = "users", allEntries = true)
-    @Override
-    public void update(User user) {
-        Assert.notNull(user, "user must not be null");
-        repository.save(user);
-    }
-
-    @CacheEvict(value = "users", allEntries = true)
-    @Override
-    public void evictCache() {
-        // only for evict cache
-    }
-}
