@@ -10,11 +10,11 @@
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
 
-    <h2>Create meal</h2>
+    <h2>Edit meal</h2>
     <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
-<form:form modelAttribute="meal" method="post" action="${pageContext.request.contextPath}/meals/add">
-<input type="hidden" name="id" value="${meal.id}">
+    <form:form modelAttribute="meal" method="post" action="${pageContext.request.contextPath}/meals/edit">
+        <input type="hidden" name="id" value="${meal.id}">
         <dl>
             <dt>DateTime:</dt>
             <dd><input type="datetime-local" value="${meal.dateTime}" name="dateTime"></dd>
@@ -27,7 +27,7 @@
             <dt>Calories:</dt>
             <dd><input type="number" value="${meal.calories}" name="calories"></dd>
         </dl>
-        <button type="submit">Save</button>
+        <button type="submit">Edit</button>
         <button onclick="window.history.back()" type="button">Cancel</button>
     </form:form>
 </section>
